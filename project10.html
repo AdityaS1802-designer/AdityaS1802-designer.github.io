@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7ff;
+            color: #005f99;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            border: 1px solid #005f99;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007acc;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f99;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Symptom Checker</h2>
+        <p>Enter your symptoms (comma-separated):</p>
+        <input type="text" id="symptoms" placeholder="e.g., fever, cough, headache">
+        <button onclick="checkSymptoms()">Check</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const diseaseDatabase = {
+            "Cold": { symptoms: ["cough", "sneezing", "runny nose"], treatment: "Rest, hydration, over-the-counter meds", severity: "Mild", doctor: "No" },
+            "Flu": { symptoms: ["fever", "cough", "body ache"], treatment: "Rest, hydration, antiviral drugs", severity: "Moderate", doctor: "Maybe" },
+            "COVID-19": { symptoms: ["fever", "cough", "shortness of breath", "loss of taste"], treatment: "Isolation, hydration, doctor consultation", severity: "Severe", doctor: "Yes" },
+            "Migraine": { symptoms: ["headache", "nausea", "light sensitivity"], treatment: "Pain relievers, rest in a dark room", severity: "Moderate", doctor: "Maybe" }
+        };
+
+        function checkSymptoms() {
+            let inputSymptoms = document.getElementById("symptoms").value.toLowerCase().split(",").map(s => s.trim());
+            let results = "";
+
+            for (let disease in diseaseDatabase) {
+                let diseaseData = diseaseDatabase[disease];
+                let matchCount = inputSymptoms.filter(symptom => diseaseData.symptoms.includes(symptom)).length;
+                
+                if (matchCount > 0) {
+                    results += `<p><strong>${disease}</strong><br>Severity: ${diseaseData.severity}<br>Recommended Treatment: ${diseaseData.treatment}<br>See a Doctor: ${diseaseData.doctor}</p>`;
+                }
+            }
+            
+            document.getElementById("result").innerHTML = results || "No matching diseases found. Please consult a doctor.";
+        }
+    </script>
+</body>
+</html>
