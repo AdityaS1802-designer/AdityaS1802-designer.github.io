@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Loading Screen</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #e0f7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .loading-screen {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .medical-icon {
+            width: 100px;
+            height: 100px;
+            background-color: #007acc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+        .medical-icon::after {
+            content: '+';
+            font-size: 60px;
+            color: white;
+            font-weight: bold;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        p {
+            font-size: 20px;
+            color: #005f99;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="medical-icon"></div>
+        <p>Loading...</p>
+    </div>
+</body>
+</html>
